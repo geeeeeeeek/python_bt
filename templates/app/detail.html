@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="wrapper">
+    <div class="top-bar">
+        <span class="first"><a href="/">首页</a></span><span class="top_fav">
+        <a href="{% url 'app:commit' %}" target="_blank">提交链接</a></span>
+    </div>
+    <div class="header-div">
+        <form class="search-form"   action="{% url 'app:search' %}" enctype="multipart/form-data" method="get" role="form">
+            <a href="/" title="磁力搜索" class="fl">
+                <img src="{% static 'img/logo.png' %}" alt="磁力搜索" class="nav-logo"></a>
+            <input type="text" id="search" title="Search" value="{{q}}"
+                   autocomplete="off" name="q" placeholder="搜搜你懂的" class="fl mt25">
+            <input style="line-height:32px;" type="submit" id="btnSearch" value="搜 索" class=" blue fl mt25">
+        </form>
+    </div>
+    <div id="content">
+        <div id="wall">
+            <h1 class="res-title">{{link.title}}</h1>
+            <div class="cover">
+                <img src="/upload/{{link.cover}}"/>
+            </div>
+            <div class="fileDetail">
+                <p>
+                    {% for item in recommend_list %}
+                    <a href="{% url 'app:search' %}?q={{item.title}}" target="" class="pill">{{item.title}}</a>
+                    {% empty %}
+                    <h3>暂无推荐</h3>
+                    {% endfor %}
+                </p>
+                <p>
+                    视频大小：{{link.size}}
+                </p>
+                <p>
+                    收录时间：{{link.timestamp}}
+                </p>
+                <p>
+                    点击热度：<span id="hits_num">{{link.hot}}</span>
+                </p>
+                <p>
+                    资源下载：<a href="{{link.url}}" class="download" target="_blank"
+                            id="down-link">链接地址</a>&nbsp;
+                    <input id="mg-link" value="{{link.url}}">
+                    <a href="javascript:;" id="copyi" data-clipboard-target="#mg-link" class="download">复制链接</a>&nbsp;
+                </p>
+                <p>
+                    视频简介：
+                </p>
+            </div>
+            <ol>
+                {{link.desc}}
+            </ol>
+            <div class="push">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

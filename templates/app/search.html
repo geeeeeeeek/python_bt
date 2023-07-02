@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="wrapper">
+    <div class="top-bar">
+        <span class="first"><a href="/">首页</a></span><span class="top_fav">
+        <a href="{% url 'app:commit' %}" target="_blank">提交链接</a></span>
+    </div>
+    <div class="header-div">
+        <form class="search-form"   action="{% url 'app:search' %}" enctype="multipart/form-data" method="get" role="form">
+            <a href="/" title="磁力搜索" class="fl">
+                <img src="{% static 'img/logo.png' %}" alt="磁力搜索" class="nav-logo"></a>
+            <input type="text" id="search" title="Search" value="{{q}}"
+                   autocomplete="off" name="q" placeholder="搜搜你懂的" class="fl mt25">
+            <input style="line-height:32px;" type="submit" id="btnSearch" value="搜 索" class=" blue fl mt25">
+        </form>
+    </div>
+    <div id="sort-bar">
+        <a href="" rel="nofollow">时间</a>
+        <a href="" rel="nofollow">热度</a>
+        <a href="" rel="nofollow">大小</a>
+    </div>
+    <div id="content">
+        <div id="wall">
+            <div class="search-statu">
+                <span>大约{{record_count}}条结果，耗时 {{duration}} 秒。</span><span></span>
+            </div>
+            <div class="row">
+                <div class="search-list col-md-8">
+
+                    {% for item in link_list %}
+                     <div class="search-item">
+                        <div class="item-title">
+                            <h3>
+                                <a href="{% url 'app:detail' item.pk %}" >
+                                    {{item.title}}
+                                </a>
+                            </h3>
+                        </div>
+                        <div class="item-list">
+                            {{item.desc}}
+                        </div>
+                        <div class="item-bar">
+                            <span class="cpill fileType1">视频</span>
+                            <span>创建时间： <b>{{item.timestamp}}</b></span>
+                            <span><b class="cpill yellow-pill">{{item.size}}</b></span>
+                            <span>视频热度：<b>{{item.hot}}</b></span>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>暂无搜索结果</h3>
+                    {% endfor %}
+
+
+                    {% if is_paginated %}
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li class="nextpage"><a href="?page={{ page_obj.previous_page_number }}{% if q %}&q={{q}}{% endif %}">«</a>
+                            </li>
+                            {% endif %}
+                            {% for i in page_list %}
+                            {% if page_obj.number == i %}
+                            <li class="active"><a href="?page={{ i }}{% if q %}&q={{q}}{% endif %}">{{ i }}</a></li>
+                            {% else %}
+                            <li class=""><a href="?page={{ i }}{% if q %}&q={{q}}{% endif %}">{{ i }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                            <li class="nextpage"><a
+                                href="?page={{ page_obj.next_page_number }}{% if q %}&q={{q}}{% endif %}">»</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+
+                    <div style="height:50px;"></div>
+
+                </div>
+                <div class="search-tips col-md-2">
+                    <div class="search-notice">
+                        本站主要用于演示软件项目，不以盈利为目的. 本站没有储存任何数据，亦不对结果承担任何责任！本站已经屏蔽了99%的非法链接，如发现非法，侵权的内容请在线举报，谢谢合作！
+                    </div>
+                    <div id="latest-search">
+                        <span class="latest-desc">大家都在搜：</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

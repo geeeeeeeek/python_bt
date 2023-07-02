@@ -1,0 +1,4 @@
+$(function() {
+
+    $('#search').focus();
+});

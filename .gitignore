@@ -1,0 +1,4 @@
+.idea
+__pycache__
+app/migrations
+bt/__pycache__/

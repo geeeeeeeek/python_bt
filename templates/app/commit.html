@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="wrapper">
+    <div class="top-bar">
+        <span class="first">
+          <span class="highlight-bar"></span>
+          <a href="/" class="selected">首页</a></span>
+        <span class="top_fav">
+          <a href="" target="_blank">提交链接</a></span>
+    </div>
+    <div id="first-content">
+        <div id="center-box-wrapper">
+            <form  action="{% url 'app:commit' %}" enctype="multipart/form-data" method="post" role="form" style="width:50%;max-width:480px; min-width:320px;margin:auto auto;">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h3>请提交合法的链接</h3>
+                    <input style="margin:20px 0px;" required name="url" type="text" class="form-control" placeholder="链接地址">
+                    <input style="margin:20px 0px;" required name="title" type="text" class="form-control" placeholder="影片名称，例如：泰坦尼克号">
+                    <span style="display:inline-block;">封面上传 &nbsp;</span><input type="file" placeholder="封面" name="cover" style="display:inline-block;"/>
+                    <input style="margin:20px 0px;" required name="size" type="text" class="form-control" placeholder="影片大小，例如：1.2Gb">
+                    <input style="margin:20px 0px;" name="contact" type="text" class="form-control" placeholder="联系方式，例如：net123@163.com">
+                    <textarea name="desc" required style="margin:20px 0px;" class="form-control" rows="3" placeholder="请输入简介，例如：《泰坦尼克号》是一部于1997年上映的美国史诗浪漫灾难电影，电影部分情节是根据1912年4月的泰坦尼克号沉没事故改编。"></textarea>
+                    <button class="btn btn-primary" type="submit">提交</button>
+                </div>
+
+                {% include "base/form_errors.html" %}
+                {% include "base/form_messages.html" %}
+            </form>
+        </div>
+    </div>
+    <div class="push"></div>
+</div>
+
+{% endblock content %}
+
