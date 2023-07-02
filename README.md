@@ -13,8 +13,8 @@ http://bt.gitapp.cn
 
 1. 下载代码后，进入到python_bt目录下
 2. 新建数据库，并修改settings.py中的数据库配置
-3. 移植sql数据，执行 python manage.py migrate
-4. 运行项目，执行 python manage.py runserver
+3. 移植sql数据，执行 `python manage.py migrate`
+4. 运行项目，执行 `python manage.py runserver`
 
 **首页展示** 
 
