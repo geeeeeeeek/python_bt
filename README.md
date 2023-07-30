@@ -1,4 +1,4 @@
-> 学习过程中，遇到问题可以咨询作者：lengqin1024（微信）
+> 学习过程中，遇到问题可以咨询作者
 
 #### 演示地址
 
@@ -26,6 +26,6 @@ http://bt.gitapp.cn
 ![](https://github.com/geeeeeeeek/bt/blob/master/static/img/demo02.png)
 
 
-#### 问题咨询
+#### 付费咨询
 
 微信: lengqin1024
